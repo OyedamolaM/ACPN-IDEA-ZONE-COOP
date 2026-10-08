@@ -46,7 +46,8 @@ export function memberBalances(state: FinanceState, memberId: string) {
   return { savings: totals.Savings, investment: totals.Investment, dividends: totals.Dividend, contributions: totals.Savings + totals.Investment };
 }
 export function fundBalances(state: FinanceState) {
-  const balances = members.map(m => memberBalances(state, m.id));
+  const memberIds = [...new Set(state.transactions.map(t => t.memberId))];
+  const balances = memberIds.map(id => memberBalances(state, id));
   const cash = balances.reduce((s, b) => s + b.savings + b.dividends, 0);
   const investment = balances.reduce((s, b) => s + b.investment, 0);
   const assets = cash + investment;

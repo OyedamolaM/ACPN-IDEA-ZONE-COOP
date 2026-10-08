@@ -1,7 +1,15 @@
 import { describe, expect, it } from 'vitest';
-import { allocateSurplus, daysHeld, deposit, distribute, initialFinance, isLowLiquidity, memberBalances, money, splitContribution } from './finance';
+import { allocateSurplus, daysHeld, deposit, distribute, fundBalances, initialFinance, isLowLiquidity, memberBalances, money, splitContribution } from './finance';
 
 describe('Cooperative financial rules', () => {
+  it('includes a newly registered member in cooperative fund balances', () => {
+    const initial = initialFinance();
+    const before = fundBalances(initial);
+    const after = fundBalances(deposit(initial, 'm6', 5000000));
+    expect(after.assets).toBe(before.assets + 5000000);
+    expect(after.cash).toBe(before.cash + 3000000);
+    expect(after.investment).toBe(before.investment + 2000000);
+  });
   it('formats all money as naira', () => { expect(money(123456)).toBe('₦1,234.56'); });
   it('splits a ₦100 contribution into ₦60 savings and ₦40 investment', () => { expect(splitContribution(10000, 60)).toEqual({ savings: 6000, investment: 4000, effectivePercent: 60 }); });
   it('preserves all kobo on an uneven deposit', () => { const s = splitContribution(101, 60); expect(s.savings + s.investment).toBe(101); });

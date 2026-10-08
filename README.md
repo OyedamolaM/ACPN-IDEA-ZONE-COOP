@@ -12,7 +12,15 @@ Continue developing this project in the [Lovable editor](https://lovable.dev/pro
 - **Stay in sync**: every change made in Lovable is committed straight to this repository.
 - **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
 
-## Development
+## Demo login and signup
+
+Open `/login` to sign in, or `/signup` to create login credentials and complete the existing pharmacist registration form at `/register`.
+
+Sample member login: `oyedamola@example.com` / `DemoPass123!`. The login screen can fill these credentials for you. The other sample members use the same demo password.
+
+Signup signs you into your own member workspace. You can log out and back in, update your details, and try the password reset flow. Accounts, credentials, contributions, and loans are held only in memory and reset on refresh. Password reset is simulated on screen and sends no email. The member/admin switch remains a simulation view switch.
+
+## Local development
 
 Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
 
